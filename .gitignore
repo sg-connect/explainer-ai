@@ -1,0 +1,62 @@
+# Private work: your own explainers, reels, voices and rendered videos.
+# Keep business-specific material here; never force-add ignored files.
+exports/
+
+# Installs
+node_modules/
+packages/tts/.venv/
+__pycache__/
+*.pyc
+
+# Downloads and generated assets (recreate with scripts/fetch-icons.sh)
+.cache/
+packages/renderer/public/icons/
+
+# Per-render copies the scripts drop into the renderer
+packages/renderer/public/reel/
+packages/renderer/public/explainer/
+
+# Render output anywhere (videos, narration, timings)
+*.mp4
+*.mov
+*.wav
+examples/**/voice/
+examples/**/timeline.json
+
+# Nx
+.nx/
+dist/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Credentials and local agent/session settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+.claude/
+.codex/
+
+# Generated media, previews, timing data and local archives
+*.m4v
+*.webm
+*.avi
+*.mp3
+*.m4a
+*.flac
+*.ogg
+voice/
+timeline.json
+.stills/
+archive/
+*.zip
+*.tar
+*.gz
+*.bundle

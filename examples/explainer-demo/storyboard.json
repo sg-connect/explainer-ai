@@ -1,0 +1,59 @@
+{
+  "title": "What happens when you upload a photo?",
+  "subtitle": "A demo explainer: upload, queue, thumbnails, CDN",
+  "series": "explainer-ai demo",
+  "narrator": { "voice": "am_michael", "speed": 1.0 },
+  "leadSeconds": 0.8,
+  "gapSeconds": 0.5,
+  "tailSeconds": 2.5,
+  "captionFix": { "A P I": "API", "C D N": "CDN" },
+
+  "diagram": {
+    "groups": [
+      { "id": "cloud", "label": "Cloud", "icon": "docker", "color": "#0EA5E9",
+        "members": ["api", "store", "queue", "worker", "cdn"], "pad": 60, "padTop": 110 }
+    ],
+    "nodes": [
+      { "id": "app", "kind": "client", "label": "Mobile app", "sub": "the user's phone", "tone": "purple", "x": 200, "y": 500 },
+      { "id": "api", "kind": "service", "label": "Upload API", "sub": "accepts the photo", "tone": "blue", "x": 700, "y": 500, "tech": ["docker"] },
+      { "id": "store", "kind": "db", "label": "Object storage", "sub": "originals", "tone": "teal", "x": 700, "y": 880 },
+      { "id": "queue", "kind": "queue", "label": "Job queue", "sub": "resize-requests", "tone": "yellow", "x": 1200, "y": 500, "tech": ["redis"] },
+      { "id": "worker", "kind": "service", "label": "Thumbnail worker", "sub": "resizes images", "tone": "green", "x": 1700, "y": 500, "tech": ["docker"] },
+      { "id": "cdn", "kind": "cloud", "label": "CDN", "sub": "serves thumbnails", "tone": "gray", "x": 1700, "y": 880 }
+    ],
+    "edges": [
+      { "id": "upload", "from": "app", "to": "api", "step": 1 },
+      { "id": "save", "from": "api", "to": "store", "step": 2, "dashed": true },
+      { "id": "enqueue", "from": "api", "to": "queue", "step": 3 },
+      { "id": "work", "from": "queue", "to": "worker", "step": 4 },
+      { "id": "publish", "from": "worker", "to": "cdn", "step": 5 },
+      { "id": "show", "from": "cdn", "to": "app", "step": 6, "bend": -550 }
+    ]
+  },
+
+  "beats": [
+    { "say": "You pick a photo and tap upload. A second later, a neat thumbnail shows up. What happened in between?",
+      "do": [ { "title": true } ] },
+    { "say": "Here's the map. One A P I, one queue, one worker, and a C D N.",
+      "do": [ { "overview": true }, { "focus": "all" } ] },
+    { "say": "The app sends the photo to the upload A P I, which saves the original in object storage.",
+      "do": [ { "focus": ["app", "api", "store"] }, { "show": ["app"], "at": "app" }, { "group": ["cloud"], "at": "upload" }, { "show": ["api"], "at": "upload" },
+              { "draw": "upload", "at": "sends" }, { "packet": "upload", "label": "POST /photos", "at": "photo", "dur": 1.4 },
+              { "show": ["store"], "at": "saves" }, { "draw": "save", "at": "saves" }, { "packet": "save", "label": "photo.jpg", "at": "original", "dur": 1.0 } ] },
+    { "say": "Resizing is slow, so the A P I doesn't do it. It drops a job on a queue and answers right away.",
+      "do": [ { "focus": ["api", "queue", "store"] }, { "show": ["queue"], "at": "drops" }, { "draw": "enqueue", "at": "drops" },
+              { "packet": "enqueue", "label": "resize job", "count": 3, "at": "job", "dur": 1.0 },
+              { "chip": "app", "text": "UPLOADED", "tone": "green", "at": "answers" },
+              { "principle": { "name": "Do slow work asynchronously", "text": "Answer the user now; let a worker finish the heavy part in the background." }, "at": "answers" } ] },
+    { "say": "A worker takes each job, makes the thumbnails, and hands them to the C D N, close to every user.",
+      "do": [ { "focus": ["queue", "worker", "cdn"] }, { "show": ["worker"], "at": "worker" }, { "draw": "work", "at": "takes" },
+              { "packet": "work", "label": "resize job", "count": 3, "at": "takes", "dur": 1.0 },
+              { "show": ["cdn"], "at": "hands" }, { "draw": "publish", "at": "hands" }, { "packet": "publish", "label": "thumb_200.jpg", "at": "hands", "dur": 1.2 },
+              { "principle": { "name": "Cache at the edge", "text": "Serve files from a CDN near the user instead of from your servers." }, "at": "close" } ] },
+    { "say": "Then the app shows the thumbnail, straight from the C D N.",
+      "do": [ { "focus": "all" }, { "draw": "show", "at": "shows" }, { "packet": "show", "label": "thumbnail", "at": "shows", "dur": 1.6 } ] },
+    { "say": "Upload fast, resize later, serve from the edge. That's the whole trick.",
+      "holdSeconds": 2.0,
+      "do": [ { "outro": { "next": "Your own diagram" } } ] }
+  ]
+}

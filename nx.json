@@ -1,0 +1,10 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*"]
+  },
+  "targetDefaults": {
+    "typecheck": { "cache": true, "inputs": ["default", "{workspaceRoot}/examples/reel-demo/boards.tsx"] }
+  },
+  "defaultBase": "main"
+}

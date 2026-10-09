@@ -1,0 +1,15 @@
+{
+  "name": "explainer-ai-workspace",
+  "private": true,
+  "description": "Narrated, animated diagram explainers and cartoon reels, rendered locally from JSON.",
+  "scripts": {
+    "setup": "npm --prefix packages/renderer install && nx run tts:setup && nx run renderer:icons",
+    "studio": "nx run renderer:studio",
+    "typecheck": "nx run renderer:typecheck",
+    "explainer": "./render-explainer.sh",
+    "reel": "./render-reel.sh"
+  },
+  "devDependencies": {
+    "nx": "^23.3.0"
+  }
+}

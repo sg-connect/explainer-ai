@@ -1,0 +1,20 @@
+{
+  "name": "tts",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "packages/tts",
+  "targets": {
+    "setup": {
+      "command": "[ -d .venv ] || uv venv --python 3.12 .venv; uv pip install --python .venv/bin/python -r requirements.txt",
+      "options": {
+        "cwd": "packages/tts"
+      }
+    },
+    "narrate": {
+      "command": "packages/tts/.venv/bin/python packages/tts/make_narration.py {args.dir}"
+    },
+    "voices": {
+      "command": "packages/tts/.venv/bin/python packages/tts/make_voices.py {args.dir}"
+    }
+  }
+}

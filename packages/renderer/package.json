@@ -1,0 +1,25 @@
+{
+  "name": "explainer-ai",
+  "private": true,
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.1",
+    "@remotion/cli": "^4.0.533",
+    "@remotion/three": "^4.0.533",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.533",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@iconify-json/devicon": "^1.2.69",
+    "@iconify-json/logos": "^1.2.15",
+    "@types/react": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2"
+  }
+}

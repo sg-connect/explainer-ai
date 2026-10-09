@@ -1,0 +1,14 @@
+{
+  "name": "renderer",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/renderer/src",
+  "targets": {
+    "install": { "command": "npm install", "options": { "cwd": "packages/renderer" } },
+    "icons": { "command": "./scripts/fetch-icons.sh" },
+    "typecheck": { "command": "npx tsc --noEmit -p .", "options": { "cwd": "packages/renderer" } },
+    "studio": { "command": "npx remotion studio src/index.ts", "options": { "cwd": "packages/renderer" } },
+    "explainer": { "command": "./render-explainer.sh {args.dir}", "options": { "args": "--dir=examples/explainer-demo" } },
+    "reel": { "command": "./render-reel.sh {args.dir}", "options": { "args": "--dir=examples/reel-demo" } }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "title": "DEMO-1 · The case of the slow page",
+  "headline": "The case of the slow page",
+  "ticket": "DEMO-1",
+  "cast": {
+    "dog": { "name": "Biscuit", "role": "PM", "voice": "am_puck", "speed": 1.05, "pitch": -1 },
+    "cat": { "name": "Inspector Whiskers", "role": "Detective", "voice": "af_heart", "speed": 0.93, "pitch": 1.5 }
+  },
+  "leadSeconds": 0.6,
+  "gapSeconds": 0.35,
+  "tailSeconds": 1.8,
+  "lines": [
+    { "who": "dog", "scene": "slow", "say": "Whiskers! Our product page takes four seconds to load. Customers are leaving!",
+      "show": "Whiskers! Our product page takes 4 seconds to load. Customers are leaving!" },
+    { "who": "cat", "scene": "slow", "say": "Four seconds, you say? Let's look at the evidence." },
+    { "who": "cat", "scene": "cause", "say": "Every visit asks the database for the same price list. Again, and again, and again." },
+    { "who": "dog", "scene": "cause", "say": "So we keep asking a question we already know the answer to?" },
+    { "who": "cat", "scene": "fix", "say": "Exactly. Keep the answer in a cache for a minute, and the page loads in a blink." },
+    { "who": "dog", "scene": "fix", "say": "Case closed!" }
+  ]
+}

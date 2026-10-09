@@ -1,0 +1,4 @@
+kokoro>=0.9.4
+transformers>=4.45
+soundfile
+numpy
